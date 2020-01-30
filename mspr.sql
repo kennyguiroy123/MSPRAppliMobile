@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 30 jan. 2020 à 10:41
+-- Généré le :  jeu. 30 jan. 2020 à 10:44
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -72,6 +72,22 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `adresseMail` varchar(50) NOT NULL,
   `dateNaissance` date NOT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateurpromotions`
+--
+
+DROP TABLE IF EXISTS `utilisateurpromotions`;
+CREATE TABLE IF NOT EXISTS `utilisateurpromotions` (
+  `id` int(11) NOT NULL,
+  `idUtilisateur` int(11) NOT NULL,
+  `idPromotion` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idPromotion` (`idPromotion`),
+  UNIQUE KEY `idUtilisateur` (`idUtilisateur`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 COMMIT;
 
