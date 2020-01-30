@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 30 jan. 2020 à 10:27
+-- Généré le :  jeu. 30 jan. 2020 à 10:41
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -37,6 +37,23 @@ CREATE TABLE IF NOT EXISTS `promotion` (
   `idCategorie` int(11) NOT NULL,
   `idProduit` int(11) NOT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `qrcode`
+--
+
+DROP TABLE IF EXISTS `qrcode`;
+CREATE TABLE IF NOT EXISTS `qrcode` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` varchar(255) NOT NULL,
+  `img` text NOT NULL,
+  `lien` text NOT NULL,
+  `idPromotion` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `FKPromotions` (`idPromotion`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
