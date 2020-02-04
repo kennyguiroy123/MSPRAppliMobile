@@ -1,4 +1,4 @@
-package fr.epsi.demo;
+package fr.epsi.applimspr;
 
 import org.junit.Test;
 

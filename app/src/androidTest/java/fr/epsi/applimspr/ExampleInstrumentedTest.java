@@ -1,4 +1,4 @@
-package fr.epsi.demo;
+package fr.epsi.applimspr;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("fr.epsi.demo", appContext.getPackageName());
+        assertEquals("fr.epsi.applimspr", appContext.getPackageName());
     }
 }
