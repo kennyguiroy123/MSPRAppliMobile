@@ -9,14 +9,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class AccueilUtilisateurActivity extends AppCompatActivity {
+public class AccueilUtilisateurActivity extends AppliActivity {
     private Button btnListPromo;
-    private ImageView imageRetourAccueil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accueilutilisateur_activity);
+        showBackBtn();
+
+
         Button btnQrCode = findViewById(R.id.buttonQrCode);
         btnQrCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +34,7 @@ public class AccueilUtilisateurActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
 
@@ -42,17 +45,4 @@ public class AccueilUtilisateurActivity extends AppCompatActivity {
         //Start camera and wait for the results.
         this.startActivityForResult(intent2, REQUEST_ID_IMAGE_CAPTURE);
     }
-
-        imageRetourAccueil = findViewById(R.id.imageViewBackAccueil);
-        imageRetourAccueil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AccueilUtilisateurActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-
 }
