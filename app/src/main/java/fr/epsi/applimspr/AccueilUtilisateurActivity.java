@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class AccueilUtilisateurActivity extends AppCompatActivity {
     private Button btnListPromo;
+    private ImageView imageRetourAccueil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class AccueilUtilisateurActivity extends AppCompatActivity {
         });
     }
 
+
     public void lancerCamera(){
         Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         //startActivity(intent2);
@@ -39,6 +42,17 @@ public class AccueilUtilisateurActivity extends AppCompatActivity {
         //Start camera and wait for the results.
         this.startActivityForResult(intent2, REQUEST_ID_IMAGE_CAPTURE);
     }
+
+        imageRetourAccueil = findViewById(R.id.imageViewBackAccueil);
+        imageRetourAccueil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AccueilUtilisateurActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 
 }
