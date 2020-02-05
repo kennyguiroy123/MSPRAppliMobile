@@ -1,6 +1,5 @@
 package fr.epsi.applimspr;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,12 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppliActivity {
     private Button btnConnexion;
 
-    public static void display(AccueilUtilisateurActivity activity){
-        Intent intent=new Intent(activity,AccueilUtilisateurActivity.class);
-        activity.startActivityForResult(intent,0);
+    public static void display(AppliActivity activity){
+        Intent intent=new Intent(activity,MainActivity.class);
+        activity.startActivity(intent);
     }
 
     @Override
@@ -24,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         btnConnexion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.display(AccueilUtilisateurActivity.this);
+                MainActivity.display(MainActivity.this);
             }
         });
     }
