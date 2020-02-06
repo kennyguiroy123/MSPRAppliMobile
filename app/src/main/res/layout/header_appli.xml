@@ -24,13 +24,13 @@
 
         <ImageView
             android:id="@+id/imageViewBackAccueil"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
-            android:visibility="gone"
-            app:srcCompat="@mipmap/ic_launcher_round" />
+            android:visibility="visible"
+            app:srcCompat="@drawable/logo_go_styles" />
 
 
     </RelativeLayout>

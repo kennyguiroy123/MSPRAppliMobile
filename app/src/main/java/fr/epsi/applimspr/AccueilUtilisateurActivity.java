@@ -1,24 +1,24 @@
 package fr.epsi.applimspr;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class AccueilUtilisateurActivity extends AppliActivity {
-    private Button btnListPromo;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accueilutilisateur_activity);
         showBackBtn();
-
-
+        //lancer le Scanner du QRCode
         Button btnQrCode = findViewById(R.id.buttonQrCode);
         btnQrCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,7 +26,8 @@ public class AccueilUtilisateurActivity extends AppliActivity {
                 lancerCamera();
             }
         });
-        btnListPromo = findViewById(R.id.buttonListPromo);
+        //voir liste des promos
+        Button btnListPromo = findViewById(R.id.buttonListPromo);
         btnListPromo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,12 +38,9 @@ public class AccueilUtilisateurActivity extends AppliActivity {
 
     }
 
-
     public void lancerCamera(){
-        Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        //startActivity(intent2);
-        int REQUEST_ID_IMAGE_CAPTURE = 100;
-        //Start camera and wait for the results.
-        this.startActivityForResult(intent2, REQUEST_ID_IMAGE_CAPTURE);
+        Intent intent2 = new Intent(this,ScannerQR.class);
+        startActivity(intent2);
     }
+
 }
