@@ -1,63 +1,89 @@
 package fr.epsi.applimspr;
 
-import android.graphics.Point;
-import android.util.Log;
+import android.os.AsyncTask;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 
-public class WebService {
+import javax.net.ssl.HttpsURLConnection;
 
-    private final String URL = "http://localhost:8000/test";
+public class WebService extends AsyncTask<Void,Void,Object>{
 
-    Gson gson;
-
-    public WebService() {
-        gson = new Gson();
-    }
-
-    public InputStream sendRequest(URL url) throws Exception {
-;        try {
-            // Ouverture de la connexion
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
-            // Connexion à l'URL
-            urlConnection.connect();
-
-            // Si le serveur nous répond avec un code OK
-            if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                return urlConnection.getInputStream();
-            }
-        } catch (Exception e) {
-            throw new Exception("");
+        interface HttpAsyTaskListener{
+            void webServiceDone(String result);
+            void webServiceError(Exception e);
         }
-        return null;
+
+        private HttpAsyTaskListener httpAsyTaskListener;
+        private String urlStr;
+
+    public WebService(String url,HttpAsyTaskListener listener){
+        httpAsyTaskListener=listener;
+        urlStr=url;
     }
 
-    public List<Point> getPoints() {
+        @Override
+        protected Object doInBackground(Void... voids) {
+        return call(urlStr);
+    }
 
+        @Override
+        protected void onPostExecute(Object o) {
+        super.onPostExecute(o);
+        if(o instanceof Exception){
+            httpAsyTaskListener.webServiceError((Exception)o);
+        }
+        else
+            httpAsyTaskListener.webServiceDone(o.toString());
+    }
+
+
+        public Object call(String urlStr) {
         try {
-            // Envoi de la requête
-            InputStream inputStream = sendRequest(new URL(URL));
-
-            // Vérification de l'inputStream
-            if(inputStream != null) {
-                // Lecture de l'inputStream dans un reader
-                InputStreamReader reader = new InputStreamReader(inputStream);
-
-                // Retourne la liste désérialisée par le moteur GSON
-                return gson.fromJson(reader, new TypeToken<List<Point>>(){}.getType());
+            java.net.URL url = null;
+            url = new URL(urlStr);
+            HttpURLConnection urlConnection;
+                urlConnection = (HttpURLConnection) url.openConnection();
+            try {
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                return convertStreamToString(in);
+            } finally {
+                urlConnection.disconnect();
             }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return e;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return e;
+        }
+    }
 
-        } catch (Exception e) {
-            Log.e("WebService", "Impossible de rapatrier les données :(");
+        private String convertStreamToString(InputStream is){
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+
+            StringBuffer stringBuffer = new StringBuffer("");
+            String line;
+
+            String NL = System.getProperty("line.separator");
+            while ((line = bufferedReader.readLine()) != null)
+            {
+                stringBuffer.append(line + NL);
+            }
+            bufferedReader.close();
+            return stringBuffer.toString();
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
         return null;
     }
-}
+
+    }
