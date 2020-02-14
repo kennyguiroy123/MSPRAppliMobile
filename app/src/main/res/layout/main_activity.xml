@@ -11,11 +11,11 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="151dp"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
-        android:orientation="vertical"
-        android:background="@android:color/holo_red_dark">
+        android:background="@android:color/holo_red_dark"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textViewUsername"
@@ -23,16 +23,17 @@
             android:layout_height="wrap_content"
             android:text="Username"
             android:textColor="@android:color/white"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editTextUsername"
             android:layout_width="match_parent"
-            android:layout_height="31dp"
+            android:layout_height="55dp"
             android:ems="10"
             android:inputType="textEmailAddress"
+            android:text="admin"
             android:textColor="@android:color/white"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textViewPassword"
@@ -40,16 +41,17 @@
             android:layout_height="wrap_content"
             android:text="password"
             android:textColor="@android:color/white"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="57dp"
             android:ems="10"
             android:inputType="textPassword"
+            android:text="admin"
             android:textColor="@android:color/white"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -58,8 +60,14 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Connexion"
         android:layout_marginTop="25dp"
-        android:background="@android:color/background_light"/>
+        android:background="@android:color/background_light"
+        android:text="Connexion" />
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="match_parent"
+        android:layout_height="285dp"
+        android:text="TextView" />
 
 </LinearLayout>
