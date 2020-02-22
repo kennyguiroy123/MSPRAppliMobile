@@ -1,6 +1,12 @@
-package fr.epsi.applimspr;
+package fr.epsi.applimspr.model;
 
-class Utilisateur {
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import com.google.gson.annotations.SerializedName;
+
+public class Utilisateur {
+
     private String token ;
 
     private String login ;
