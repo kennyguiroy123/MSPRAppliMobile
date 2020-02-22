@@ -27,7 +27,6 @@
         </activity>
         <activity android:name=".AccueilUtilisateurActivity" />
         <activity android:name=".ListPromoActivity" />
-        <activity android:name=".ScannerQR" ></activity>
     </application>
 
 </manifest>
