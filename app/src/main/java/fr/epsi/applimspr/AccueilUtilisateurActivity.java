@@ -54,7 +54,6 @@ public class AccueilUtilisateurActivity extends AppliActivity implements View.On
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         String text_qrcode = result.getContents();
         int id = text_qrcode.length()-1;
-
         if (result.getContents() != null) {
             if(result.getContents().equals("error!")){
                 Toast.makeText(getApplicationContext(),"error! content result !",Toast.LENGTH_SHORT);
@@ -66,7 +65,6 @@ public class AccueilUtilisateurActivity extends AppliActivity implements View.On
                 //TODO : Amélioration : remplacer Toast par Dialogue popup
                 new fetchData().execute();
                 Toast.makeText(getApplicationContext(),"Une réduction a été rajouté à votre compte", Toast.LENGTH_LONG).show();
-
             }else {
                 afficherListePromotions();
                 Toast.makeText(getApplicationContext(), "Ce code n'est pas valide", Toast.LENGTH_LONG).show();
@@ -104,7 +102,8 @@ public class AccueilUtilisateurActivity extends AppliActivity implements View.On
                 conn.setDoInput(true);
                 conn.setRequestProperty( "charset", "utf-8");
                 conn.setUseCaches(false);
-                String jsonInputString = "{\"id\":"+id_reduction+"\",\"token\":\""+token+"\"}";
+                String jsonInputString = "{\"id\":"+id_reduction+",\"token\":\""+token+"\"}";
+                System.out.println("json_entrée : "+jsonInputString.toString());
                 //reponse
                 try(OutputStream os = conn.getOutputStream()) {
                     byte[] input = jsonInputString.getBytes("utf-8");
@@ -120,7 +119,7 @@ public class AccueilUtilisateurActivity extends AppliActivity implements View.On
                         stringBuilder.append(temp);
                     }
                     result = stringBuilder.toString();
-                    System.out.println("################"+result); //débuge
+                    System.out.println("################result"+result); //débuge
                 }
                 else{
                     return "error!";
@@ -138,6 +137,7 @@ public class AccueilUtilisateurActivity extends AppliActivity implements View.On
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            System.out.println("#########Onpost:"+s);
             }
     }
 
