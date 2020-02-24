@@ -23,6 +23,7 @@ import java.net.URL;
 public class AccueilUtilisateurActivity extends AppliActivity implements View.OnClickListener {
     private IntentIntegrator qrScan;
     public String token = MainActivity.token;
+    public Character id_reduction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,15 +52,26 @@ public class AccueilUtilisateurActivity extends AppliActivity implements View.On
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        String text_qrcode = result.getContents();
+        int id = text_qrcode.length()-1;
+
         if (result.getContents() != null) {
-            if (result.getContents().contains("http://localhost:8000") ) {
+            if(result.getContents().equals("error!")){
+                Toast.makeText(getApplicationContext(),"error! content result !",Toast.LENGTH_SHORT);
+                System.out.println("error! content result !");
+            }else{
+            if (result.getContents().contains("10.0.2.2:8000") ) {
+                //cast link to get id
+                id_reduction =text_qrcode.charAt(id);
                 //TODO : Amélioration : remplacer Toast par Dialogue popup
-                Toast.makeText(getApplicationContext(),"Une réduction a été rajouté à votre compte", Toast.LENGTH_LONG).show();
                 new fetchData().execute();
+                Toast.makeText(getApplicationContext(),"Une réduction a été rajouté à votre compte", Toast.LENGTH_LONG).show();
+
             }else {
                 afficherListePromotions();
                 Toast.makeText(getApplicationContext(), "Ce code n'est pas valide", Toast.LENGTH_LONG).show();
             }
+        }
         } else {
             Toast.makeText(getApplicationContext(), "Annulation!", Toast.LENGTH_SHORT).show();
             afficherListePromotions();
@@ -83,7 +95,7 @@ public class AccueilUtilisateurActivity extends AppliActivity implements View.On
         protected String doInBackground(String... params) {
             String result = null;
             try {
-                URL url = new URL("http://10.0.2.2:8000/test"); //TODO /getReduct/{id_reduc}
+                URL url = new URL("http://10.0.2.2:8000/getReduct"); //TODO /getReduct/{id_reduc}
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setDoOutput( true );
                 conn.setInstanceFollowRedirects( false );
@@ -92,7 +104,7 @@ public class AccueilUtilisateurActivity extends AppliActivity implements View.On
                 conn.setDoInput(true);
                 conn.setRequestProperty( "charset", "utf-8");
                 conn.setUseCaches(false);
-                String jsonInputString = "{\"id\":1,\"token\":\""+token+"\"}";
+                String jsonInputString = "{\"id\":"+id_reduction+"\",\"token\":\""+token+"\"}";
                 //reponse
                 try(OutputStream os = conn.getOutputStream()) {
                     byte[] input = jsonInputString.getBytes("utf-8");
@@ -108,7 +120,7 @@ public class AccueilUtilisateurActivity extends AppliActivity implements View.On
                         stringBuilder.append(temp);
                     }
                     result = stringBuilder.toString();
-                    System.out.println(result); //débuge
+                    System.out.println("################"+result); //débuge
                 }
                 else{
                     return "error!";
@@ -126,7 +138,6 @@ public class AccueilUtilisateurActivity extends AppliActivity implements View.On
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
             }
     }
 

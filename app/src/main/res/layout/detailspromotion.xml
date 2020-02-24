@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:id="@+id/id"
+        android:id="@+id/pctPromo"
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:gravity="center"

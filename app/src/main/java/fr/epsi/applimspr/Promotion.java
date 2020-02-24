@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class Promotion implements Serializable {
 
-    private String id="";
+    private String pctPromo="";
     private String libelle = "";
     private String dateExpiration="";
 
@@ -16,13 +16,6 @@ public class Promotion implements Serializable {
     }
 
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getLibelle() {
         return libelle;
@@ -38,5 +31,13 @@ public class Promotion implements Serializable {
 
     public void setDateExpiration(String dateExpiration) {
         this.dateExpiration = dateExpiration;
+    }
+
+    public String getPctPromo() {
+        return pctPromo;
+    }
+
+    public void setPctPromo(String pctPromo) {
+        this.pctPromo = pctPromo;
     }
 }

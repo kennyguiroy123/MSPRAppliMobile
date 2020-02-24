@@ -47,13 +47,13 @@ public class PromotionAdapter extends BaseAdapter {
         if (convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.detailspromotion,parent,false);
         }
-        TextView id, libelle, dateExpiration;
+        TextView pctPromo, libelle, dateExpiration;
 
-        id =(TextView) convertView.findViewById(R.id.id);
+        pctPromo =(TextView) convertView.findViewById(R.id.pctPromo);
         libelle = (TextView) convertView.findViewById(R.id.libelle);
         dateExpiration = (TextView) convertView.findViewById(R.id.dateExpriation);
 
-        id.setText(arrayList.get(position).getId());
+        pctPromo.setText(arrayList.get(position).getPctPromo());
         libelle.setText(arrayList.get(position).getLibelle());
         dateExpiration.setText(arrayList.get(position).getDateExpiration());
         return convertView;

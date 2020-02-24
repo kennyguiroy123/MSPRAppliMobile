@@ -61,7 +61,7 @@ public class ListPromoActivity extends AppliActivity {
             arrayList.clear();
             String result = null;
             try {
-                URL url = new URL("http://10.0.2.2:8000/test");
+                URL url = new URL("http://10.0.2.2:8000/getAllReduct");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setDoOutput( true );
                 conn.setInstanceFollowRedirects( false );
@@ -70,10 +70,8 @@ public class ListPromoActivity extends AppliActivity {
                 conn.setDoInput(true);
                 conn.setRequestProperty( "charset", "utf-8");
                 conn.setUseCaches(false);
-                String jsonInputString = "{\"data\":[{\"id\":1,\"libelle\":\"promotion -10%\", \"date expiration\":\"11-11-2011\"},\n" +
-                        "{\"id\":2,\"libelle\":\"promotion -20%\", \"date expiration\":\"12-12-2012\"}\n" +
-                        "]}";
-                System.out.println("token##########################"+token);
+                String jsonInputString = "{\"token\":\""+token+"\"}";
+                System.out.println(jsonInputString);
                 //TODO : remplacer jsonInputString par token au foramt json
                 try(OutputStream os = conn.getOutputStream()) {
                     byte[] input = jsonInputString.getBytes("utf-8");
@@ -109,15 +107,14 @@ public class ListPromoActivity extends AppliActivity {
             super.onPostExecute(s);
             swipeRefresh.setRefreshing(false);
             try {
-                JSONObject object = new JSONObject(s);
-                JSONArray array = object.getJSONArray("data");
+                JSONArray array = new JSONArray(s);
                 for(int i=0;i<array.length();i++){
                     JSONObject jsonObject = array.getJSONObject(i);
-                    String id = jsonObject.getString("id");
+                    String pctPromo = jsonObject.getString("pctPromo");
                     String libelle = jsonObject.getString("libelle");
-                    String dateExpiration = jsonObject.getString("date expiration");
+                    String dateExpiration = jsonObject.getString("dateExpiration");
                     Promotion promotion = new Promotion();
-                    promotion.setId("Promo N°: "+id);
+                    promotion.setPctPromo(pctPromo);
                     promotion.setLibelle(libelle);
                     promotion.setDateExpiration("date d'éxpiration: "+dateExpiration);
                     arrayList.add(promotion);
