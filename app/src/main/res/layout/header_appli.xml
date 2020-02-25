@@ -9,17 +9,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp">
+        android:layout_height="56dp"
+        android:background="#B4DBDBB6">
 
 
         <TextView
             android:id="@+id/textNomAppli"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/holo_red_dark"
-            android:textColor="@android:color/white"
             android:gravity="center"
-            android:text="GoStyles"
+            android:text="Bienvenu"
+            android:textColor="#112A4A"
             android:textSize="20dp" />
 
         <ImageView
@@ -29,8 +29,8 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
-            android:visibility="visible"
-            app:srcCompat="@drawable/logo_go_styles" />
+            android:visibility="gone"
+            app:srcCompat="@drawable/back_button" />
 
 
     </RelativeLayout>
