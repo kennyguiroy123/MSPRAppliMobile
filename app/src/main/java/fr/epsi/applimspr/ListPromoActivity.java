@@ -117,6 +117,7 @@ public class ListPromoActivity extends AppliActivity {
                     promotion.setPctPromo(pctPromo);
                     promotion.setLibelle(libelle);
                     promotion.setDateExpiration("A utiliser avant le : "+dateExpiration);
+
                     arrayList.add(promotion);
 
                 }
