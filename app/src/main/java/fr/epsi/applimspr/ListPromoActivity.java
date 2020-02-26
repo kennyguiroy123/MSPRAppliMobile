@@ -71,8 +71,8 @@ public class ListPromoActivity extends AppliActivity {
                 conn.setRequestProperty( "charset", "utf-8");
                 conn.setUseCaches(false);
                 String jsonInputString = "{\"token\":\""+token+"\"}";
-                System.out.println(jsonInputString);
-                //TODO : remplacer jsonInputString par token au foramt json
+                System.out.println("entrée json: " +jsonInputString.toString());
+
                 try(OutputStream os = conn.getOutputStream()) {
                     byte[] input = jsonInputString.getBytes("utf-8");
                     os.write(input, 0, input.length);
@@ -116,8 +116,9 @@ public class ListPromoActivity extends AppliActivity {
                     Promotion promotion = new Promotion();
                     promotion.setPctPromo(pctPromo);
                     promotion.setLibelle(libelle);
-                    promotion.setDateExpiration("date d'éxpiration: "+dateExpiration);
+                    promotion.setDateExpiration("A utiliser avant le : "+dateExpiration);
                     arrayList.add(promotion);
+
                 }
 
             } catch (JSONException e) {

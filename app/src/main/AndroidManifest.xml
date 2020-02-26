@@ -8,8 +8,6 @@
     <uses-feature android:name="android.hardware.camera" android:required="true"/>
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-
-
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
@@ -21,12 +19,11 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AccueilUtilisateurActivity" />
         <activity android:name=".ListPromoActivity" />
+        <activity android:name=".AccueilUtilisateurActivity"/>
+        <activity android:name=".AnyOrientationCaptureActivity" />
     </application>
-
 </manifest>
