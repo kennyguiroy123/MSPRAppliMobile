@@ -142,7 +142,7 @@ public class AccueilUtilisateurActivity extends AppliActivity implements View.On
             super.onPostExecute(s);
 
             if(s.equals("OK")){
-            openDialog("Félicitation","Une réduction a été ajouté à votre compte","OK");
+            openDialog("Félicitations","Une réduction a été ajouté à votre compte","OK");
             //afficherListePromotions();
             }
             else if(s.equals("promotion déjà scannée")){
